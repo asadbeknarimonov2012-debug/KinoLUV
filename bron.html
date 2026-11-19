@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Joy bron qilish — KinoLUV Toshkent</title>
+  <style>
+    :root {
+      --bg: #0c0e14;
+      --surface: #151822;
+      --surface-2: #1f2433;
+      --text: #f6f8fc;
+      --muted: #a1a9bf;
+      --border: rgba(246, 248, 252, 0.12);
+      --ok: #2bc47e;
+      --busy: #3b4154;
+      --grad: linear-gradient(135deg, #ff3b30 0%, #ff7a18 50%, #9333ea 100%);
+      --grad-soft: linear-gradient(135deg, rgba(255, 59, 48, 0.18) 0%, rgba(147, 51, 234, 0.18) 100%);
+      --grad-panel: linear-gradient(160deg, #171b27 0%, #10131d 100%);
+      --shadow: 0 18px 42px rgba(0, 0, 0, 0.5);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      transition: background 0.3s var(--ease), color 0.25s var(--ease), transform 0.3s var(--ease), border-color 0.3s var(--ease);
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1220px, 100% - 32px);
+      margin-inline: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(21, 24, 34, 0.9);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--grad);
+      color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 8px 14px;
+      border-radius: 10px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    nav a:hover,
+    nav a.active {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    main {
+      padding: 34px 0 60px;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .top-bar h1 {
+      margin: 0 0 4px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+    }
+
+    .top-bar p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .back-link {
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--grad-panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .group {
+      margin-bottom: 22px;
+    }
+
+    .group h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* Radio va checkbox doirachalarini 100% yashirish */
+    .chips input[type="radio"],
+    .seat-wrap input[type="checkbox"] {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chip {
+      padding: 9px 15px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .chip:hover {
+      color: var(--text);
+      border-color: rgba(255, 122, 24, 0.5);
+    }
+
+    .chips input[type="radio"]:checked + .chip {
+      background: var(--grad);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 8px 20px rgba(255, 59, 48, 0.28);
+    }
+
+    .screen-line {
+      height: 7px;
+      border-radius: 999px;
+      background: var(--grad);
+      width: 78%;
+      margin: 14px auto 6px;
+    }
+
+    .screen-txt {
+      text-align: center;
+      font-size: 0.76rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .hall {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .seat-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: max-content;
+      margin-inline: auto;
+    }
+
+    .row-name {
+      width: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .seat-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px 8px 4px 4px;
+      background: var(--ok);
+      color: #07130d;
+      font-size: 0.75rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .seat-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .seat-wrap input[type="checkbox"]:checked + .seat-btn {
+      background: var(--grad);
+      color: #fff;
+      outline: 2px solid #fff;
+    }
+
+    .seat-btn.busy {
+      background: var(--busy);
+      color: var(--muted);
+      cursor: not-allowed;
+      opacity: 0.65;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .box-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .confirm-btn {
+      display: block;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 14px;
+      background: var(--grad);
+      color: #fff;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(255, 59, 48, 0.3);
+    }
+
+    .confirm-box {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--grad-soft);
+      border: 1px solid rgba(255, 122, 24, 0.55);
+    }
+
+    .confirm-box:target {
+      display: block;
+    }
+
+    .code-txt {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      margin: 6px 0;
+    }
+
+    .poster-box {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      max-height: 360px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #10131d;
+    }
+
+    .poster-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .rate-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(12, 14, 20, 0.85);
+      color: #ffd166;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .city-tag {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: var(--grad);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.74rem;
+    }
+
+    @media (max-width: 960px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-icon">▶</span>
+        <span>KinoLUV</span>
+      </a>
+      <nav>
+        <a href="index.html">Bosh sahifa</a>
+        <a href="katalog.html">Kinolar katalogi</a>
+        <a href="bron.html" class="active">Bron qilish</a>
+        <a href="haqimizda.html">Kinoteatrlar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="top-bar">
+      <div>
+        <h1>Seans va o'rindiq bron qilish</h1>
+        <p>Toshkent kinoteatrini, kunni, vaqtni va zal o'rindiqlarini tanlang.</p>
+      </div>
+      <a href="katalog.html" class="back-link">← Katalogga qaytish</a>
+    </div>
+
+    <div class="layout">
+      <section class="panel">
+        <div class="group">
+          <h3>1. Toshkent kinoteatrini tanlang</h3>
+          <div class="chips">
+            <input type="radio" name="cinema" id="c1" checked>
+            <label for="c1" class="chip">Синема Юнусабад</label>
+
+            <input type="radio" name="cinema" id="c2">
+            <label for="c2" class="chip">Синема Чиланзар</label>
+
+            <input type="radio" name="cinema" id="c3">
+            <label for="c3" class="chip">Синема Мирабад</label>
+
+            <input type="radio" name="cinema" id="c4">
+            <label for="c4" class="chip">Синема Сергели</label>
+
+            <input type="radio" name="cinema" id="c5">
+            <label for="c5" class="chip">Синема Центр</label>
+          </div>
+        </div>
+
+        <div class="group">
+          <h3>2. Kunni tanlang</h3>
+          <div class="chips">
+            <input type="radio" name="day" id="d1" checked>
+            <label for="d1" class="chip">Bugun • 19 Noy</label>
+
+            <input type="radio" name="day" id="d2">
+            <label for="d2" class="chip">Ertaga • 20 Noy</label>
+
+            <input type="radio" name="day" id="d3">
+            <label for="d3" class="chip">Shanba • 21 Noy</label>
+
+            <input type="radio" name="day" id="d4">
+            <label for="d4" class="chip">Yakshanba • 22 Noy</label>
+          </div>
+        </div>
+
+        <div class="group">
+          <h3>3. Seans vaqtini tanlang</h3>
+          <div class="chips">
+            <input type="radio" name="time" id="t1">
+            <label for="t1" class="chip">10:30</label>
+
+            <input type="radio" name="time" id="t2">
+            <label for="t2" class="chip">13:15</label>
+
+            <input type="radio" name="time" id="t3">
+            <label for="t3" class="chip">16:00</label>
+
+            <input type="radio" name="time" id="t4" checked>
+            <label for="t4" class="chip">19:00</label>
+
+            <input type="radio" name="time" id="t5">
+            <label for="t5" class="chip">21:45</label>
+          </div>
+        </div>
+
+        <div class="group">
+          <h3>4. Zal sxemasidan joylarni tanlang</h3>
+          <div class="screen-line"></div>
+          <div class="screen-txt">KINO EKRANI</div>
+
+          <div class="hall">
+            <div class="seat-row">
+              <span class="row-name">A</span>
+              <span class="seat-wrap"><input type="checkbox" id="a1"><label for="a1" class="seat-btn">1</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="a2"><label for="a2" class="seat-btn">2</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="a3" checked><label for="a3" class="seat-btn">3</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="a4"><label for="a4" class="seat-btn">4</label></span>
+              <span class="seat-btn busy">5</span>
+              <span class="seat-btn busy">6</span>
+              <span class="seat-wrap"><input type="checkbox" id="a7"><label for="a7" class="seat-btn">7</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="a8"><label for="a8" class="seat-btn">8</label></span>
+            </div>
+
+            <div class="seat-row">
+              <span class="row-name">B</span>
+              <span class="seat-wrap"><input type="checkbox" id="b1"><label for="b1" class="seat-btn">1</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="b2"><label for="b2" class="seat-btn">2</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="b3"><label for="b3" class="seat-btn">3</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="b4" checked><label for="b4" class="seat-btn">4</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="b5"><label for="b5" class="seat-btn">5</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="b6"><label for="b6" class="seat-btn">6</label></span>
+              <span class="seat-btn busy">7</span>
+              <span class="seat-wrap"><input type="checkbox" id="b8"><label for="b8" class="seat-btn">8</label></span>
+            </div>
+
+            <div class="seat-row">
+              <span class="row-name">C</span>
+              <span class="seat-wrap"><input type="checkbox" id="c1"><label for="c1" class="seat-btn">1</label></span>
+              <span class="seat-btn busy">2</span>
+              <span class="seat-wrap"><input type="checkbox" id="c3"><label for="c3" class="seat-btn">3</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="c4"><label for="c4" class="seat-btn">4</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="c5"><label for="c5" class="seat-btn">5</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="c6"><label for="c6" class="seat-btn">6</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="c7"><label for="c7" class="seat-btn">7</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="c8"><label for="c8" class="seat-btn">8</label></span>
+            </div>
+
+            <div class="seat-row">
+              <span class="row-name">D</span>
+              <span class="seat-wrap"><input type="checkbox" id="d1"><label for="d1" class="seat-btn">1</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="d2"><label for="d2" class="seat-btn">2</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="d3"><label for="d3" class="seat-btn">3</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="d4"><label for="d4" class="seat-btn">4</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="d5"><label for="d5" class="seat-btn">5</label></span>
+              <span class="seat-btn busy">6</span>
+              <span class="seat-wrap"><input type="checkbox" id="d7"><label for="d7" class="seat-btn">7</label></span>
+              <span class="seat-wrap"><input type="checkbox" id="d8"><label for="d8" class="seat-btn">8</label></span>
+            </div>
+          </div>
+
+          <div class="legend">
+            <span class="legend-item"><i class="box-dot" style="background: var(--ok);"></i>Bo'sh joy</span>
+            <span class="legend-item"><i class="box-dot" style="background: #ff7a18;"></i>Tanlangan</span>
+            <span class="legend-item"><i class="box-dot" style="background: var(--busy);"></i>Band</span>
+          </div>
+        </div>
+
+        <a href="#bron-tasdiq" class="confirm-btn">Bronni tasdiqlash</a>
+
+        <div id="bron-tasdiq" class="confirm-box">
+          <strong>Bron qabul qilindi!</strong>
+          <div class="code-txt">LUV-8429</div>
+          <p style="margin: 0; color: var(--muted); font-size: 0.9rem;">Seans boshlanishidan 30 daqiqa oldin kassada kodni ayting.</p>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <div class="poster-box">
+          <img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Film afishasi">
+          <span class="rate-tag">★ 8.6 / 10</span>
+          <span class="city-tag">Toshkent Kinoteatrlari</span>
+        </div>
+        <h2 style="margin: 0 0 8px;">Film bahosi va qisqa tavsifi</h2>
+        <p style="margin: 0 0 12px; color: var(--muted);">
+          Har bir seansda ovoz tizimi, qulay kreslolar va ekran ko'rinishi tekshirilgan. Tanlagan filmingizning reytingi (★) va syujet tavsifi asosida o'zingizga maqbul vaqt va kinoteatrni belgilashingiz mumkin.
+        </p>
+        <p style="margin: 0; font-size: 0.9rem; color: var(--muted);">
+          <strong>Manzillar:</strong> Yunusobod, Chilonzor, Mirobod, Sergeli va Markaziy hududlardagi zallar.
+        </p>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
