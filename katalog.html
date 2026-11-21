@@ -19,13 +19,23 @@
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
-      transition: background 0.35s var(--ease), color 0.3s var(--ease), transform 0.35s var(--ease), border-color 0.3s var(--ease), box-shadow 0.35s var(--ease);
+      transition:
+        background 0.35s var(--ease),
+        color 0.3s var(--ease),
+        transform 0.35s var(--ease),
+        border-color 0.3s var(--ease),
+        box-shadow 0.35s var(--ease);
     }
 
+    html,
     body {
       margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
@@ -37,8 +47,10 @@
       text-decoration: none;
     }
 
-    .sr-only {
+    .genre-radio {
       position: absolute;
+      width: 1px;
+      height: 1px;
       opacity: 0;
       pointer-events: none;
     }
@@ -53,7 +65,7 @@
       top: 0;
       z-index: 40;
       backdrop-filter: blur(14px);
-      background: var(--surface);
+      background: rgba(21, 24, 34, 0.92);
       border-bottom: 1px solid var(--border);
     }
 
@@ -62,7 +74,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
@@ -71,7 +83,7 @@
       align-items: center;
       gap: 10px;
       font-weight: 800;
-      font-size: 1.3rem;
+      font-size: 1.25rem;
     }
 
     .brand-icon {
@@ -91,11 +103,12 @@
     }
 
     nav a {
-      padding: 8px 14px;
+      padding: 8px 13px;
       border-radius: 10px;
       color: var(--muted);
       font-weight: 600;
-      font-size: 0.94rem;
+      font-size: 0.9rem;
+      white-space: nowrap;
     }
 
     nav a:hover,
@@ -105,11 +118,11 @@
     }
 
     main {
-      padding: 34px 0 60px;
+      padding: 32px 0 60px;
     }
 
     .page-head {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .page-head h1 {
@@ -120,6 +133,11 @@
     .page-head p {
       margin: 0;
       color: var(--muted);
+    }
+
+    .catalog-section {
+      display: flex;
+      flex-direction: column;
     }
 
     .filters {
@@ -153,13 +171,13 @@
       border-color: transparent;
     }
 
-    #f-sci:checked ~ .grid .card:not([data-g="sci"]),
-    #f-act:checked ~ .grid .card:not([data-g="act"]),
-    #f-drm:checked ~ .grid .card:not([data-g="drm"]),
-    #f-thr:checked ~ .grid .card:not([data-g="thr"]),
-    #f-com:checked ~ .grid .card:not([data-g="com"]),
-    #f-ani:checked ~ .grid .card:not([data-g="ani"]),
-    #f-fnt:checked ~ .grid .card:not([data-g="fnt"]) {
+    #f-sci:checked ~ .grid > .card:not([data-g="sci"]),
+    #f-act:checked ~ .grid > .card:not([data-g="act"]),
+    #f-drm:checked ~ .grid > .card:not([data-g="drm"]),
+    #f-thr:checked ~ .grid > .card:not([data-g="thr"]),
+    #f-com:checked ~ .grid > .card:not([data-g="com"]),
+    #f-ani:checked ~ .grid > .card:not([data-g="ani"]),
+    #f-fnt:checked ~ .grid > .card:not([data-g="fnt"]) {
       display: none;
     }
 
@@ -188,7 +206,7 @@
       position: relative;
       width: 100%;
       aspect-ratio: 2 / 3;
-      background: #121622;
+      background: #141824;
       overflow: hidden;
     }
 
@@ -293,87 +311,90 @@
   <main class="container">
     <div class="page-head">
       <h1>Kinolar katalogi (56 ta film)</h1>
-      <p>Har bir filmning o'z afishasi, bahosi (★) va tavsifi.</p>
+      <p>Har bir kartochkada rasm (object-fit: cover), reyting (★) va tavsif mavjud.</p>
     </div>
 
-    <input type="radio" name="genre" id="f-all" class="sr-only" checked>
-    <input type="radio" name="genre" id="f-sci" class="sr-only">
-    <input type="radio" name="genre" id="f-act" class="sr-only">
-    <input type="radio" name="genre" id="f-drm" class="sr-only">
-    <input type="radio" name="genre" id="f-thr" class="sr-only">
-    <input type="radio" name="genre" id="f-com" class="sr-only">
-    <input type="radio" name="genre" id="f-ani" class="sr-only">
-    <input type="radio" name="genre" id="f-fnt" class="sr-only">
+    <div class="catalog-section">
+      <input type="radio" name="genre" id="f-all" class="genre-radio" checked>
+      <input type="radio" name="genre" id="f-sci" class="genre-radio">
+      <input type="radio" name="genre" id="f-act" class="genre-radio">
+      <input type="radio" name="genre" id="f-drm" class="genre-radio">
+      <input type="radio" name="genre" id="f-thr" class="genre-radio">
+      <input type="radio" name="genre" id="f-com" class="genre-radio">
+      <input type="radio" name="genre" id="f-ani" class="genre-radio">
+      <input type="radio" name="genre" id="f-fnt" class="genre-radio">
 
-    <div class="filters">
-      <label for="f-all" class="filter-btn">Barchasi (56)</label>
-      <label for="f-sci" class="filter-btn">Фантастика</label>
-      <label for="f-act" class="filter-btn">Боевик</label>
-      <label for="f-drm" class="filter-btn">Драма</label>
-      <label for="f-thr" class="filter-btn">Триллер</label>
-      <label for="f-com" class="filter-btn">Комедия</label>
-      <label for="f-ani" class="filter-btn">Мультфильм</label>
-      <label for="f-fnt" class="filter-btn">Фэнтези</label>
-    </div>
+      <div class="filters">
+        <label for="f-all" class="filter-btn">Barchasi (56)</label>
+        <label for="f-sci" class="filter-btn">Фантастика</label>
+        <label for="f-act" class="filter-btn">Боевик</label>
+        <label for="f-drm" class="filter-btn">Драма</label>
+        <label for="f-thr" class="filter-btn">Триллер</label>
+        <label for="f-com" class="filter-btn">Комедия</label>
+        <label for="f-ani" class="filter-btn">Мультфильм</label>
+        <label for="f-fnt" class="filter-btn">Фэнтези</label>
+      </div>
 
-    <div class="grid">
-      <a href="bron.html#film-0" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" alt="Интерстеллар afisha"><span class="badge-rate">★ 8.6</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Интерстеллар</h3><p class="card-meta">169 min • #1</p><p class="card-desc">Yangi sayyora izlab fazoga uchgan tadqiqotchilar dramasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-1" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2F8dT7NIa6f.jpg" alt="Начало afisha"><span class="badge-rate">★ 8.8</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Начало</h3><p class="card-meta">148 min • #2</p><p class="card-desc">Tushlar qatlamida kechadigan murakkab va hayajonli sarguzasht.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-2" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg" alt="Матрица afisha"><span class="badge-rate">★ 8.7</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Матрица</h3><p class="card-meta">136 min • #3</p><p class="card-desc">Raqamli simulyatsiya sirini anglagan qahramon kurashi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-3" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg" alt="Бегущий по лезвию 2049 afisha"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Бегущий по лезвию 2049</h3><p class="card-meta">164 min • #4</p><p class="card-desc">Kelajak shahridagi yashirin sirni ochuvchi ofitser hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-4" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg" alt="Дюна afisha"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Дюна</h3><p class="card-meta">155 min • #5</p><p class="card-desc">Arrakis sayyorasidagi resurs va hokimiyat uchun kurash.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-5" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/kyeqWdyUXW608qlYkRqosgbbJyK.jpg" alt="Аватар afisha"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Аватар</h3><p class="card-meta">162 min • #6</p><p class="card-desc">Pandora sayyorasidagi tabiat va xalqni himoya qilgan jangchi tarixi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-6" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/5Mly9q3L1j20a4pO30H0v9I95dT.jpg" alt="Терминатор 2 afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Терминатор 2</h3><p class="card-meta">137 min • #7</p><p class="card-desc">Kelajak taqdirini belgilovchi o'smirni himoya qilish missiyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-7" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/ty8TGRuvPUNAmAR1QehdrUFoQWq.jpg" alt="Гладиатор afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Гладиатор</h3><p class="card-meta">155 min • #8</p><p class="card-desc">Xiyonatga uchragan sarkardaning Rim arenalarida kurashi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-8" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" alt="Темный рыцарь afisha"><span class="badge-rate">★ 9.0</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Темный рыцарь</h3><p class="card-meta">152 min • #9</p><p class="card-desc">Gotham tinchligi uchun kechadigan keskin qarama-qarshilik.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-9" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O46tffO.jpg" alt="Безумный Макс: Дорога ярости afisha"><span class="badge-rate">★ 8.1</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Безумный Макс: Дорога ярости</h3><p class="card-meta">120 min • #10</p><p class="card-desc">Cho'l kengliklaridagi to'xtovsiz quvish va ozodlik yo'li.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-10" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/yPisjyLweCl1zwr1GNPmbViyJRZ.jpg" alt="Крепкий орешек afisha"><span class="badge-rate">★ 8.2</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Крепкий орешек</h3><p class="card-meta">132 min • #11</p><p class="card-desc">Osmono'par binodagi garovdagilarni qutqarish operatsiyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-11" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/z0h2I8M2c4k2j9S3p6h5d9e2.jpg" alt="Миссия невыполнима afisha"><span class="badge-rate">★ 7.1</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Миссия невыполнима</h3><p class="card-meta">110 min • #12</p><p class="card-desc">Maxfiy agent o'z sha'nini oqlash uchun kurashadi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-12" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg" alt="Побег из Шоушенка afisha"><span class="badge-rate">★ 9.1</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Побег из Шоушенка</h3><p class="card-meta">142 min • #13</p><p class="card-desc">Umid, do'stlik va ozodlik sari sabrli yo'l hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-13" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/velWPhVMQeQKcxggNEU8YmIo52R.jpg" alt="Зелёная миля afisha"><span class="badge-rate">★ 8.6</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Зелёная миля</h3><p class="card-meta">189 min • #14</p><p class="card-desc">G'ayrioddiy qobiliyatga ega mahbus va nazoratchi dramasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-14" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg" alt="Форрест Гамп afisha"><span class="badge-rate">★ 8.8</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Форрест Гамп</h3><p class="card-meta">142 min • #15</p><p class="card-desc">Samimiy qahramonning tarixiy voqealar ichidagi hayoti.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-15" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" alt="Крёстный отец afisha"><span class="badge-rate">★ 9.0</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Крёстный отец</h3><p class="card-meta">175 min • #16</p><p class="card-desc">Nufuzli oila boshlig'i va vorisining og'ir tanlovlari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-16" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg" alt="Список Шиндлера afisha"><span class="badge-rate">★ 9.0</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Список Шиндлера</h3><p class="card-meta">195 min • #17</p><p class="card-desc">Insonlar hayotini asrab qolgan jasorat haqidagi drama.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-17" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg" alt="Титаник afisha"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Титаник</h3><p class="card-meta">194 min • #18</p><p class="card-desc">Buyuk layner safaridagi muhabbat va taqdir sinovlari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-18" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" alt="Паразиты afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Паразиты</h3><p class="card-meta">132 min • #19</p><p class="card-desc">Ikki oila hayotining keskin va kutilmagan to'qnashuvi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-19" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" alt="Бойцовский клуб afisha"><span class="badge-rate">★ 8.7</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Бойцовский клуб</h3><p class="card-meta">139 min • #20</p><p class="card-desc">Zamonaviy hayotga qarshi isyon va psixologik drama.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-20" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg" alt="Джокер afisha"><span class="badge-rate">★ 8.4</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Джокер</h3><p class="card-meta">122 min • #21</p><p class="card-desc">Jamiyat e'tiboridan chetda qolgan insonning o'zgarishi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-21" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/uS2m0Y1899a26g0L7w8T5d3m2c1.jpg" alt="Молчание ягнят afisha"><span class="badge-rate">★ 8.3</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Молчание ягнят</h3><p class="card-meta">118 min • #22</p><p class="card-desc">Yosh tergovchi va mahbus o'rtasidagi keskin aqliy o'yin.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-22" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/4n1v6G8T3p6N1e0V9z7x2c4b5a6.jpg" alt="Остров проклятых afisha"><span class="badge-rate">★ 8.2</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Остров проклятых</h3><p class="card-meta">138 min • #23</p><p class="card-desc">Uzoq oroldagi maxsus muassasada sirli surishtiruv.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-23" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/6yoghtyTpznpBik8EngEmJskVUO.jpg" alt="Семь afisha"><span class="badge-rate">★ 8.6</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Семь</h3><p class="card-meta">127 min • #24</p><p class="card-desc">Shaharda sodir bo'layotgan sirli ishlar izidan borish.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-24" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/4fLZUr1e65hKPPVIvRWTkTvLEwQ.jpg" alt="Шестое чувство afisha"><span class="badge-rate">★ 8.1</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Шестое чувство</h3><p class="card-meta">107 min • #25</p><p class="card-desc">G'ayrioddiy sezgiga ega bolakay va shifokor hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-25" class="card" data-g="com"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/onTSkiL8VVlAzBW8Nka67fa5Klj.jpg" alt="Один дома afisha"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Один дома</h3><p class="card-meta">103 min • #26</p><p class="card-desc">Uyda yolg'iz qolgan bolakayning o'g'rilarga qarshi hiylalari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-26" class="card" data-g="com"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/xO8b7837f9G9p9r5p8w2y1z3x4c.jpg" alt="Маска afisha"><span class="badge-rate">★ 7.4</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Маска</h3><p class="card-meta">101 min • #27</p><p class="card-desc">Sehrli niqob taqqan qahramonning quvnoq sarguzashtlari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-27" class="card" data-g="com"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/w49z0h5g1f2d3s4a5p6o7i8u9y.jpg" alt="Эйс Вентура afisha"><span class="badge-rate">★ 7.0</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Эйс Вентура</h3><p class="card-meta">86 min • #28</p><p class="card-desc">Jonivorlarni izlovchi detektivning sho'x komediyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-28" class="card" data-g="com"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/7v1x2c3v4b5n6m7q8w9e0r1t2y.jpg" alt="Здравствуйте, я ваша тётя afisha"><span class="badge-rate">★ 7.8</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Здравствуйте, я ваша тётя</h3><p class="card-meta">95 min • #29</p><p class="card-desc">Klassik va kulgili sahna ko'rinishlariga boy komediya.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-29" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg" alt="Король Лев afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Король Лев</h3><p class="card-meta">88 min • #30</p><p class="card-desc">Savannadagi taxt va o'z o'rnini topish yo'li.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-30" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/2b4o1u2y3t4r5e6w7q8a9s0d1f.jpg" alt="Тачки afisha"><span class="badge-rate">★ 7.2</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Тачки</h3><p class="card-meta">117 min • #31</p><p class="card-desc">Poygachining do'stlik va qadriyatlarni kashf etishi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-31" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/iB6xBwK3hOUyIM3t97v1v2x3c4v.jpg" alt="Шрек afisha"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Шрек</h3><p class="card-meta">90 min • #32</p><p class="card-desc">Ertaknamo va hazil-mutoyibali safar hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-32" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/mbm8h3g4f5d6s7a8p9o0i1u2y3.jpg" alt="Холодное сердце afisha"><span class="badge-rate">★ 7.4</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Холодное сердце</h3><p class="card-meta">102 min • #33</p><p class="card-desc">Ikki opa-singilning mehr va sadoqatga to'la sarguzashti.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-33" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/np234567890qweasdZXC123456.jpg" alt="Вверх afisha"><span class="badge-rate">★ 8.2</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Вверх</h3><p class="card-meta">96 min • #34</p><p class="card-desc">Sharlar yordamida osmonga ko'tarilgan uy sayohati.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-34" class="card" data-g="fnt"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg" alt="Властелин колец: Братство кольца afisha"><span class="badge-rate">★ 8.8</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Властелин колец: Братство кольца</h3><p class="card-meta">178 min • #35</p><p class="card-desc">O'rta Yer taqdirini belgilovchi buyuk safar.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-35" class="card" data-g="fnt"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg" alt="Гарри Поттер и философский камень afisha"><span class="badge-rate">★ 7.6</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Гарри Поттер и философский камень</h3><p class="card-meta">152 min • #36</p><p class="card-desc">Sehrgarlik maktabidagi sirli va mo'jizali sarguzasht.</p><span class="card-btn">Bron qilish</span></div></a>
+      <div class="grid">
+        <a href="bron.html#film-0" class="card" data-g="sci"><div class="poster-box"><img src="https://ru-images-s.kinorium.com/movie/1080/384511.jpg?1752568882" alt="Интерстеллар"><span class="badge-rate">★ 8.6</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Интерстеллар</h3><p class="card-meta">169 min • #1</p><p class="card-desc">Yangi sayyora izlab fazoga uchgan tadqiqotchilar dramasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-1" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-02.jpg" alt="Начало"><span class="badge-rate">★ 8.8</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Начало</h3><p class="card-meta">148 min • #2</p><p class="card-desc">Tushlar qatlamida kechadigan murakkab va hayajonli sarguzasht.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-2" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-03.jpg" alt="Матрица"><span class="badge-rate">★ 8.7</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Матрица</h3><p class="card-meta">136 min • #3</p><p class="card-desc">Raqamli simulyatsiya sirini anglagan qahramon kurashi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-3" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-04.jpg" alt="Бегущий по лезвию 2049"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Бегущий по лезвию 2049</h3><p class="card-meta">164 min • #4</p><p class="card-desc">Kelajak shahridagi yashirin sirni ochuvchi ofitser hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-4" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-05.jpg" alt="Дюна"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Дюна</h3><p class="card-meta">155 min • #5</p><p class="card-desc">Arrakis sayyorasidagi resurs va hokimiyat uchun kurash.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-5" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-06.jpg" alt="Аватар"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Аватар</h3><p class="card-meta">162 min • #6</p><p class="card-desc">Pandora sayyorasidagi tabiat va xalqni himoya qilgan jangchi tarixi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-6" class="card" data-g="act"><div class="poster-box"><img src="posters/film-07.jpg" alt="Терминатор 2"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Терминатор 2</h3><p class="card-meta">137 min • #7</p><p class="card-desc">Kelajak taqdirini belgilovchi o'smirni himoya qilish missiyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-7" class="card" data-g="act"><div class="poster-box"><img src="posters/film-08.jpg" alt="Гладиатор"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Гладиатор</h3><p class="card-meta">155 min • #8</p><p class="card-desc">Xiyonatga uchragan sarkardaning Rim arenalarida kurashi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-8" class="card" data-g="act"><div class="poster-box"><img src="posters/film-09.jpg" alt="Темный рыцарь"><span class="badge-rate">★ 9.0</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Темный рыцарь</h3><p class="card-meta">152 min • #9</p><p class="card-desc">Gotham tinchligi uchun kechadigan keskin qarama-qarshilik.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-9" class="card" data-g="act"><div class="poster-box"><img src="posters/film-10.jpg" alt="Безумный Макс: Дорога ярости"><span class="badge-rate">★ 8.1</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Безумный Макс: Дорога ярости</h3><p class="card-meta">120 min • #10</p><p class="card-desc">Cho'l kengliklaridagi to'xtovsiz quvish va ozodlik yo'li.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-10" class="card" data-g="act"><div class="poster-box"><img src="posters/film-11.jpg" alt="Крепкий орешек"><span class="badge-rate">★ 8.2</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Крепкий орешек</h3><p class="card-meta">132 min • #11</p><p class="card-desc">Osmono'par binodagi garovdagilarni qutqarish operatsiyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-11" class="card" data-g="act"><div class="poster-box"><img src="posters/film-12.jpg" alt="Миссия невыполнима"><span class="badge-rate">★ 7.1</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Миссия невыполнима</h3><p class="card-meta">110 min • #12</p><p class="card-desc">Maxfiy agent o'z sha'nini oqlash uchun kurashadi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-12" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-13.jpg" alt="Побег из Шоушенка"><span class="badge-rate">★ 9.1</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Побег из Шоушенка</h3><p class="card-meta">142 min • #13</p><p class="card-desc">Umid, do'stlik va ozodlik sari sabrli yo'l hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-13" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-14.jpg" alt="Зелёная миля"><span class="badge-rate">★ 8.6</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Зелёная миля</h3><p class="card-meta">189 min • #14</p><p class="card-desc">G'ayrioddiy qobiliyatga ega mahbus va nazoratchi dramasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-14" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-15.jpg" alt="Форрест Гамп"><span class="badge-rate">★ 8.8</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Форрест Гамп</h3><p class="card-meta">142 min • #15</p><p class="card-desc">Samimiy qahramonning tarixiy voqealar ichidagi hayoti.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-15" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-16.jpg" alt="Крёстный отец"><span class="badge-rate">★ 9.0</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Крёстный отец</h3><p class="card-meta">175 min • #16</p><p class="card-desc">Nufuzli oila boshlig'i va vorisining og'ir tanlovlari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-16" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-17.jpg" alt="Список Шиндлера"><span class="badge-rate">★ 9.0</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Список Шиндлера</h3><p class="card-meta">195 min • #17</p><p class="card-desc">Insonlar hayotini asrab qolgan jasorat haqidagi drama.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-17" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-18.jpg" alt="Титаник"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Титаник</h3><p class="card-meta">194 min • #18</p><p class="card-desc">Buyuk layner safaridagi muhabbat va taqdir sinovlari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-18" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-19.jpg" alt="Паразиты"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Паразиты</h3><p class="card-meta">132 min • #19</p><p class="card-desc">Ikki oila hayotining keskin va kutilmagan to'qnashuvi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-19" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-20.jpg" alt="Бойцовский клуб"><span class="badge-rate">★ 8.7</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Бойцовский клуб</h3><p class="card-meta">139 min • #20</p><p class="card-desc">Zamonaviy hayotga qarshi isyon va psixologik drama.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-20" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-21.jpg" alt="Джокер"><span class="badge-rate">★ 8.4</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Джокер</h3><p class="card-meta">122 min • #21</p><p class="card-desc">Jamiyat e'tiboridan chetda qolgan insonning o'zgarishi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-21" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-22.jpg" alt="Молчание ягнят"><span class="badge-rate">★ 8.3</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Молчание ягнят</h3><p class="card-meta">118 min • #22</p><p class="card-desc">Yosh tergovchi va mahbus o'rtasidagi keskin aqliy o'yin.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-22" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-23.jpg" alt="Остров проклятых"><span class="badge-rate">★ 8.2</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Остров проклятых</h3><p class="card-meta">138 min • #23</p><p class="card-desc">Uzoq oroldagi maxsus muassasada sirli surishtiruv.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-23" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-24.jpg" alt="Семь"><span class="badge-rate">★ 8.6</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Семь</h3><p class="card-meta">127 min • #24</p><p class="card-desc">Shaharda sodir bo'layotgan sirli ishlar izidan borish.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-24" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-25.jpg" alt="Шестое чувство"><span class="badge-rate">★ 8.1</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Шестое чувство</h3><p class="card-meta">107 min • #25</p><p class="card-desc">G'ayrioddiy sezgiga ega bolakay va shifokor hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-25" class="card" data-g="com"><div class="poster-box"><img src="posters/film-26.jpg" alt="Один дома"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Один дома</h3><p class="card-meta">103 min • #26</p><p class="card-desc">Uyda yolg'iz qolgan bolakayning o'g'rilarga qarshi hiylalari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-26" class="card" data-g="com"><div class="poster-box"><img src="posters/film-27.jpg" alt="Маска"><span class="badge-rate">★ 7.4</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Маска</h3><p class="card-meta">101 min • #27</p><p class="card-desc">Sehrli niqob taqqan qahramonning quvnoq sarguzashtlari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-27" class="card" data-g="com"><div class="poster-box"><img src="posters/film-28.jpg" alt="Эйс Вентура"><span class="badge-rate">★ 7.0</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Эйс Вентура</h3><p class="card-meta">86 min • #28</p><p class="card-desc">Jonivorlarni izlovchi detektivning sho'x komediyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-28" class="card" data-g="com"><div class="poster-box"><img src="posters/film-29.jpg" alt="Здравствуйте, я ваша тётя"><span class="badge-rate">★ 7.8</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Здравствуйте, я ваша тётя</h3><p class="card-meta">95 min • #29</p><p class="card-desc">Klassik va kulgili sahna ko'rinishlariga boy komediya.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-29" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-30.jpg" alt="Король Лев"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Король Лев</h3><p class="card-meta">88 min • #30</p><p class="card-desc">Savannadagi taxt va o'z o'rnini topish yo'li.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-30" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-31.jpg" alt="Тачки"><span class="badge-rate">★ 7.2</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Тачки</h3><p class="card-meta">117 min • #31</p><p class="card-desc">Poygachining do'stlik va qadriyatlarni kashf etishi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-31" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-32.jpg" alt="Шрек"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Шрек</h3><p class="card-meta">90 min • #32</p><p class="card-desc">Ertaknamo va hazil-mutoyibali safar hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-32" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-33.jpg" alt="Холодное сердце"><span class="badge-rate">★ 7.4</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Холодное сердце</h3><p class="card-meta">102 min • #33</p><p class="card-desc">Ikki opa-singilning mehr va sadoqatga to'la sarguzashti.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-33" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-34.jpg" alt="Вверх"><span class="badge-rate">★ 8.2</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Вверх</h3><p class="card-meta">96 min • #34</p><p class="card-desc">Sharlar yordamida osmonga ko'tarilgan uy sayohati.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-34" class="card" data-g="fnt"><div class="poster-box"><img src="posters/film-35.jpg" alt="Властелин колец: Братство кольца"><span class="badge-rate">★ 8.8</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Властелин колец: Братство кольца</h3><p class="card-meta">178 min • #35</p><p class="card-desc">O'rta Yer taqdirini belgilovchi buyuk safar.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-35" class="card" data-g="fnt"><div class="poster-box"><img src="posters/film-36.jpg" alt="Гарри Поттер и философский камень"><span class="badge-rate">★ 7.6</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Гарри Поттер и философский камень</h3><p class="card-meta">152 min • #36</p><p class="card-desc">Sehrgarlik maktabidagi sirli va mo'jizali sarguzasht.</p><span class="card-btn">Bron qilish</span></div></a>
 
-      <a href="bron.html#film-36" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/x2FJsf1ZaIm677u5T37y5s3s1d2.jpg" alt="Прибытие afisha"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Прибытие</h3><p class="card-meta">116 min • #37</p><p class="card-desc">Noma'lum obyektlar tilini o'rganish kashfiyoti.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-37" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/5B6xBwK3hOUyIM3t97v1v2x3c4v.jpg" alt="Марсианин afisha"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Марсианин</h3><p class="card-meta">144 min • #38</p><p class="card-desc">Marsda yolg'iz qolgan astronavtning omon qolishi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-38" class="card" data-g="sci"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/9n2tJBplPbgR2ca05hS5CKXwP2c.jpg" alt="Гравитация afisha"><span class="badge-rate">★ 7.7</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Гравитация</h3><p class="card-meta">91 min • #39</p><p class="card-desc">Ochiq fazoda halokatga uchragan ekipaj kurashi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-39" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/fZPSd91yGE9fTuCe3oRan6P1H12.jpg" alt="Джон Уик afisha"><span class="badge-rate">★ 7.4</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Джон Уик</h3><p class="card-meta">101 min • #40</p><p class="card-desc">Nafaqadagi professionalning tezkor va keskin qaytishi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-40" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/6drCMFmh9raG3d539z23916232.jpg" alt="Топ Ган: Мэверик afisha"><span class="badge-rate">★ 8.3</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Топ Ган: Мэверик</h3><p class="card-meta">130 min • #41</p><p class="card-desc">Murakkab parvoz missiyasiga tayyorgarlik hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-41" class="card" data-g="act"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/ob1y6B6043214567890qwertyui.jpg" alt="Джентльмены afisha"><span class="badge-rate">★ 7.8</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Джентльмены</h3><p class="card-meta">113 min • #42</p><p class="card-desc">London jinoyat olamidagi nufuzli bitim voqealari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-42" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/7pO9z1x2c3v4b5n6m7a8s9d0f1.jpg" alt="Одержимость afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Одержимость</h3><p class="card-meta">106 min • #43</p><p class="card-desc">Yosh barabanchi va ustoz o'rtasidagi keskin kurash.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-43" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/8qW2e3r4t5y6u7i8o9p0a1s2d3.jpg" alt="1+1 (Неприкасаемые) afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">1+1 (Неприкасаемые)</h3><p class="card-meta">112 min • #44</p><p class="card-desc">Samimiy do'stlik va hayotga muhabbat tarixi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-44" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" alt="Оппенгеймер afisha"><span class="badge-rate">★ 8.3</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Оппенгеймер</h3><p class="card-meta">181 min • #45</p><p class="card-desc">Tarixiy qarorlar va yadroviy asr dramasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-45" class="card" data-g="drm"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/t2z3x4c5v6b7n8m9q0w1e2r3t4.jpg" alt="Престиж afisha"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Престиж</h3><p class="card-meta">130 min • #46</p><p class="card-desc">Ikki illyuzionistning sahna siri va raqobati.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-46" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/pZg1z2x3c4v5b6n7m8l9k0j1h2.jpg" alt="Достать ножи afisha"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Достать ножи</h3><p class="card-meta">130 min • #47</p><p class="card-desc">Sirli hodisani ochuvchi zukko detektiv hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-47" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/q1w2e3r4t5y6u7i8o9p0z1x2c3.jpg" alt="Поймай меня, если сможешь afisha"><span class="badge-rate">★ 8.1</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Поймай меня, если сможешь</h3><p class="card-meta">141 min • #48</p><p class="card-desc">Mohir firibgar va agentning ko'p yillik quvlashuvi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-48" class="card" data-g="thr"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/a1s2d3f4g5h6j7k8l9z0x1c2v3.jpg" alt="Иллюзия обмана afisha"><span class="badge-rate">★ 7.3</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Иллюзия обмана</h3><p class="card-meta">115 min • #49</p><p class="card-desc">Katta sahnadagi hayratlanarli illyuziya tomoshalari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-49" class="card" data-g="com"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/z1x2c3v4b5n6m7q8w9e0r1t2y3.jpg" alt="Мальчишник в Вегасе afisha"><span class="badge-rate">★ 7.7</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Мальчишник в Вегасе</h3><p class="card-meta">100 min • #50</p><p class="card-desc">Yo'qolgan do'stni izlashdagi kulgili sarguzashtlar.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-50" class="card" data-g="com"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/m1n2b3v4c5x6z7l8k9j0h1g2f3.jpg" alt="Главный герой afisha"><span class="badge-rate">★ 7.1</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Главный герой</h3><p class="card-meta">115 min • #51</p><p class="card-desc">Virtual olamdagi qahramonning o'zgarish hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-51" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/hm58l415807467890qwertyuiop.jpg" alt="Душа (Soul) afisha"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Душа (Soul)</h3><p class="card-meta">100 min • #52</p><p class="card-desc">Musiqaga oshiq qahramonning hayot mazmunini topishi.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-52" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg" alt="Тайна Коко afisha"><span class="badge-rate">★ 8.4</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Тайна Коко</h3><p class="card-meta">105 min • #53</p><p class="card-desc">Musiqachi bo'lishni orzu qilgan bolaning safarlari.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-53" class="card" data-g="ani"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/w1e2r3t4y5u6i7o8p9a0s1d2f3.jpg" alt="Кунг-фу Панда afisha"><span class="badge-rate">★ 7.6</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Кунг-фу Панда</h3><p class="card-meta">92 min • #54</p><p class="card-desc">Kutilmaganda kung-fu ustasiga aylangan pandaning sarguzashti.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-54" class="card" data-g="fnt"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/z8CB3kuJaoUVcbAZ8uWMfzkzWpR.jpg" alt="Пираты Карибского моря afisha"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Пираты Карибского моря</h3><p class="card-meta">143 min • #55</p><p class="card-desc">Dengiz sarguzashtlari va xazinalar haqidagi hikoya.</p><span class="card-btn">Bron qilish</span></div></a>
-      <a href="bron.html#film-55" class="card" data-g="fnt"><div class="poster-box"><img src="https://image.tmdb.org/t/p/w500/i1j2k3l4z5x6c7v8b9n0m1q2w3.jpg" alt="Хроники Нарнии afisha"><span class="badge-rate">★ 6.9</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Хроники Нарнии</h3><p class="card-meta">143 min • #56</p><p class="card-desc">Sehrli o'lkadagi mo'jizaviy va jasoratli sarguzasht.</p><span class="card-btn">Bron qilish</span></div></a>
+        <!-- 20 ta yangi film -->
+        <a href="bron.html#film-36" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-37.jpg" alt="Прибытие"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Прибытие</h3><p class="card-meta">116 min • #37</p><p class="card-desc">Noma'lum obyektlar tilini o'rganish kashfiyoti.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-37" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-38.jpg" alt="Марсианин"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Марсианин</h3><p class="card-meta">144 min • #38</p><p class="card-desc">Marsda yolg'iz qolgan astronavtning omon qolishi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-38" class="card" data-g="sci"><div class="poster-box"><img src="posters/film-39.jpg" alt="Гравитация"><span class="badge-rate">★ 7.7</span><span class="badge-genre">Фантастика</span></div><div class="card-body"><h3 class="card-title">Гравитация</h3><p class="card-meta">91 min • #39</p><p class="card-desc">Ochiq fazoda halokatga uchragan ekipaj kurashi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-39" class="card" data-g="act"><div class="poster-box"><img src="posters/film-40.jpg" alt="Джон Уик"><span class="badge-rate">★ 7.4</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Джон Уик</h3><p class="card-meta">101 min • #40</p><p class="card-desc">Nafaqadagi professionalning tezkor va keskin qaytishi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-40" class="card" data-g="act"><div class="poster-box"><img src="posters/film-41.jpg" alt="Топ Ган: Мэверик"><span class="badge-rate">★ 8.3</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Топ Ган: Мэверик</h3><p class="card-meta">130 min • #41</p><p class="card-desc">Murakkab parvoz missiyasiga tayyorgarlik hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-41" class="card" data-g="act"><div class="poster-box"><img src="posters/film-42.jpg" alt="Джентльмены"><span class="badge-rate">★ 7.8</span><span class="badge-genre">Боевик</span></div><div class="card-body"><h3 class="card-title">Джентльмены</h3><p class="card-meta">113 min • #42</p><p class="card-desc">London jinoyat olamidagi nufuzli bitim voqealari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-42" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-43.jpg" alt="Одержимость"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Одержимость</h3><p class="card-meta">106 min • #43</p><p class="card-desc">Yosh barabanchi va ustoz o'rtasidagi keskin kurash.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-43" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-44.jpg" alt="1+1 (Неприкасаемые)"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">1+1 (Неприкасаемые)</h3><p class="card-meta">112 min • #44</p><p class="card-desc">Samimiy do'stlik va hayotga muhabbat tarixi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-44" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-45.jpg" alt="Оппенгеймер"><span class="badge-rate">★ 8.3</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Оппенгеймер</h3><p class="card-meta">181 min • #45</p><p class="card-desc">Tarixiy qarorlar va yadroviy asr dramasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-45" class="card" data-g="drm"><div class="poster-box"><img src="posters/film-46.jpg" alt="Престиж"><span class="badge-rate">★ 8.5</span><span class="badge-genre">Драма</span></div><div class="card-body"><h3 class="card-title">Престиж</h3><p class="card-meta">130 min • #46</p><p class="card-desc">Ikki illyuzionistning sahna siri va raqobati.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-46" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-47.jpg" alt="Достать ножи"><span class="badge-rate">★ 7.9</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Достать ножи</h3><p class="card-meta">130 min • #47</p><p class="card-desc">Sirli hodisani ochuvchi zukko detektiv hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-47" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-48.jpg" alt="Поймай меня, если сможешь"><span class="badge-rate">★ 8.1</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Поймай меня, если сможешь</h3><p class="card-meta">141 min • #48</p><p class="card-desc">Mohir firibgar va agentning ko'p yillik quvlashuvi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-48" class="card" data-g="thr"><div class="poster-box"><img src="posters/film-49.jpg" alt="Иллюзия обмана"><span class="badge-rate">★ 7.3</span><span class="badge-genre">Триллер</span></div><div class="card-body"><h3 class="card-title">Иллюзия обмана</h3><p class="card-meta">115 min • #49</p><p class="card-desc">Katta sahnadagi hayratlanarli illyuziya tomoshalari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-49" class="card" data-g="com"><div class="poster-box"><img src="posters/film-50.jpg" alt="Мальчишник в Вегасе"><span class="badge-rate">★ 7.7</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Мальчишник в Вегасе</h3><p class="card-meta">100 min • #50</p><p class="card-desc">Yo'qolgan do'stni izlashdagi kulgili sarguzashtlar.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-50" class="card" data-g="com"><div class="poster-box"><img src="posters/film-51.jpg" alt="Главный герой"><span class="badge-rate">★ 7.1</span><span class="badge-genre">Комедия</span></div><div class="card-body"><h3 class="card-title">Главный герой</h3><p class="card-meta">115 min • #51</p><p class="card-desc">Virtual olamdagi qahramonning o'zgarish hikoyasi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-51" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-52.jpg" alt="Душа (Soul)"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Душа (Soul)</h3><p class="card-meta">100 min • #52</p><p class="card-desc">Musiqaga oshiq qahramonning hayot mazmunini topishi.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-52" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-53.jpg" alt="Тайна Коко"><span class="badge-rate">★ 8.4</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Тайна Коко</h3><p class="card-meta">105 min • #53</p><p class="card-desc">Musiqachi bo'lishni orzu qilgan bolaning safarlari.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-53" class="card" data-g="ani"><div class="poster-box"><img src="posters/film-54.jpg" alt="Кунг-фу Панда"><span class="badge-rate">★ 7.6</span><span class="badge-genre">Мультфильм</span></div><div class="card-body"><h3 class="card-title">Кунг-фу Панда</h3><p class="card-meta">92 min • #54</p><p class="card-desc">Kutilmaganda kung-fu ustasiga aylangan pandaning sarguzashti.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-54" class="card" data-g="fnt"><div class="poster-box"><img src="posters/film-55.jpg" alt="Пираты Карибского моря"><span class="badge-rate">★ 8.0</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Пираты Карибского моря</h3><p class="card-meta">143 min • #55</p><p class="card-desc">Dengiz sarguzashtlari va xazinalar haqidagi hikoya.</p><span class="card-btn">Bron qilish</span></div></a>
+        <a href="bron.html#film-55" class="card" data-g="fnt"><div class="poster-box"><img src="posters/film-56.jpg" alt="Хроники Нарнии"><span class="badge-rate">★ 6.9</span><span class="badge-genre">Фэнтези</span></div><div class="card-body"><h3 class="card-title">Хроники Нарнии</h3><p class="card-meta">143 min • #56</p><p class="card-desc">Sehrli o'lkadagi mo'jizaviy va jasoratli sarguzasht.</p><span class="card-btn">Bron qilish</span></div></a>
+      </div>
     </div>
   </main>
 </body>
